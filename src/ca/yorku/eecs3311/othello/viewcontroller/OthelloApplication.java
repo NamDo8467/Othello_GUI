@@ -1,15 +1,20 @@
 package ca.yorku.eecs3311.othello.viewcontroller;
+
 import ca.yorku.eecs3311.othello.model.*;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class OthelloApplication extends Application {
@@ -17,6 +22,13 @@ public class OthelloApplication extends Application {
 	// --module-path "/usr/share/openjfx/lib" --add-modules javafx.controls,javafx.fxml
 	// in the run configuration under VM arguments.
 	// You can import the JavaFX.prototype launch configuration and use it as well.
+	final int PREF_HEIGHT = 50;
+	final int BUTTON_HEIGHT = 40;
+	final int BUTTON_WIDTH = 120;
+	final int GAME_NAME_LABEL_HEIGHT = 40;
+	final int GAME_NAME_LABEL_WIDTH = 120;
+	final int SCENE_HEIGHT = 500;
+	final int SCENE_WIDTH = 550;
 	
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -29,13 +41,51 @@ public class OthelloApplication extends Application {
 		// CONTROLLER->MODEL hookup
 	
 		// VIEW
+		Label gameNameLabel = new Label("Othello");
+		gameNameLabel.setFont(new Font(25));
+		gameNameLabel.setPrefSize(GAME_NAME_LABEL_WIDTH, GAME_NAME_LABEL_HEIGHT);
+		gameNameLabel.setAlignment(Pos.CENTER);
+
+		
+		Button vPlayerVSPlayerButton = new Button("Player vs Player");
+		Button vPlayerVSAIButton = new Button("Player vs AI");
+		Button vPlayerVSRandomButton = new Button("Player vs Random");
+		Button [] buttonArray = {vPlayerVSAIButton, vPlayerVSPlayerButton, vPlayerVSRandomButton};
+		
 		// VIEW->CONTROLLER hookup
 		// MODEL->VIEW hookup
 		
 		GridPane grid = new GridPane();
 		
+		grid.add(gameNameLabel, 0, 0);
+		grid.add(vPlayerVSPlayerButton, 0, 1);
+		grid.add(vPlayerVSAIButton, 0, 2);
+		grid.add(vPlayerVSRandomButton, 0, 3);
+		
+		RowConstraints row0 = new RowConstraints();
+		RowConstraints row1 = new RowConstraints();
+		RowConstraints row2 = new RowConstraints();
+		RowConstraints row3 = new RowConstraints();
+		
+		RowConstraints [] rowConstraintArray = {row0, row1, row2, row3};
+		for(RowConstraints row: rowConstraintArray) {
+			grid.getRowConstraints().add(row);
+			row.setPrefHeight(PREF_HEIGHT);
+		}
+		
+		for(Button button:buttonArray) {
+
+			button.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+			button.setFocusTraversable(false);
+			GridPane.setHalignment(button, HPos.CENTER);
+			GridPane.setValignment(button, VPos.CENTER);
+		}		
+		grid.setAlignment(Pos.CENTER);
+//		grid.setGridLinesVisible(true);
+  
+		
 		// SCENE
-		Scene scene = new Scene(grid); 
+		Scene scene = new Scene(grid, SCENE_WIDTH, SCENE_HEIGHT); 
 		stage.setTitle("Othello");
 		stage.setScene(scene);
 				

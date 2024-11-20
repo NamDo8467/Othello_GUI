@@ -34,7 +34,7 @@ public class MVCApplication extends Application {
 
 		// VIEW LAYOUT
 		HBox root = new HBox();
-		root.setPadding(new Insets(5));
+		root.setPadding(new Insets(20));
 		root.getChildren().addAll(vIncButton, vDecButton, vCount, vParity);
 		
 		// VIEW SCENE
