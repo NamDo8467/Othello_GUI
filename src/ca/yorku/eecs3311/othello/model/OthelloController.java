@@ -1,10 +1,12 @@
 package ca.yorku.eecs3311.othello.model;
 
+import javafx.stage.Stage;
+
 public abstract class OthelloController {
 
 	protected Othello othello;
 	Player player1, player2;
-
+	
 	/**
 	 * Constructs a new OthelloController with a new Othello game, ready to play
 	 * with a user at the console.
@@ -12,6 +14,8 @@ public abstract class OthelloController {
 	public OthelloController() {
 		this.othello = new Othello();
 	}
+	
+	 
 
 	public void play() {
 		while (!othello.isGameOver()) {

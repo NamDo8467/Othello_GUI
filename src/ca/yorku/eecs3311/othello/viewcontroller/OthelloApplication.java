@@ -3,15 +3,12 @@ package ca.yorku.eecs3311.othello.viewcontroller;
 import ca.yorku.eecs3311.othello.model.*;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Font;
@@ -27,18 +24,20 @@ public class OthelloApplication extends Application {
 	final int BUTTON_WIDTH = 120;
 	final int GAME_NAME_LABEL_HEIGHT = 40;
 	final int GAME_NAME_LABEL_WIDTH = 120;
-	final int SCENE_HEIGHT = 500;
-	final int SCENE_WIDTH = 550;
+	public static final int SCENE_HEIGHT = 560;
+	public static final int SCENE_WIDTH = 560;
 	
 	@Override
 	public void start(Stage stage) throws Exception {
 		// Create and hook up the Model, View and the controller
 		
 		// MODEL
-		Othello othello=new Othello();
+		Othello othello = new Othello();
+		OthelloControllerHumanVSHuman playerVSPlayerController = new OthelloControllerHumanVSHuman();
 		
 		// CONTROLLER
 		// CONTROLLER->MODEL hookup
+		CButtonPressEventHandler cpresshandler= new CButtonPressEventHandler(othello, stage);
 	
 		// VIEW
 		Label gameNameLabel = new Label("Othello");
@@ -53,6 +52,7 @@ public class OthelloApplication extends Application {
 		Button [] buttonArray = {vPlayerVSAIButton, vPlayerVSPlayerButton, vPlayerVSRandomButton};
 		
 		// VIEW->CONTROLLER hookup
+		vPlayerVSPlayerButton.setOnAction(cpresshandler);
 		// MODEL->VIEW hookup
 		
 		GridPane grid = new GridPane();
@@ -81,13 +81,16 @@ public class OthelloApplication extends Application {
 			GridPane.setValignment(button, VPos.CENTER);
 		}		
 		grid.setAlignment(Pos.CENTER);
-//		grid.setGridLinesVisible(true);
+		
   
 		
 		// SCENE
-		Scene scene = new Scene(grid, SCENE_WIDTH, SCENE_HEIGHT); 
+		Scene scene = new Scene(grid, SCENE_WIDTH, SCENE_HEIGHT);
+		
+		GridPane g = new GridPane();
 		stage.setTitle("Othello");
 		stage.setScene(scene);
+		
 				
 		// LAUNCH THE GUI
 		stage.show();

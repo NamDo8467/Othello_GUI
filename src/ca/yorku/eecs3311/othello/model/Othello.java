@@ -1,5 +1,9 @@
 package ca.yorku.eecs3311.othello.model;
+import ca.yorku.eecs3311.othello.viewcontroller.OthelloApplication;
 import ca.yorku.eecs3311.util.*;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 import java.util.Random;
 
 /**
@@ -18,10 +22,18 @@ import java.util.Random;
  */
 public class Othello {
 	public static final int DIMENSION=8; // This is an 8x8 game
-
+	
 	private OthelloBoard board=new OthelloBoard(Othello.DIMENSION);
 	private char whosTurn = OthelloBoard.P1;
 	private int numMoves = 0;
+
+	
+	public void setGameGrid(Stage stage) {
+		Scene scene = new Scene(this.board.gridBoard, OthelloApplication.SCENE_WIDTH, OthelloApplication.SCENE_HEIGHT);
+		stage.setScene(scene);
+	}
+	
+	
 
 	/**
 	 * return P1,P2 or EMPTY depending on who moves next.
@@ -127,17 +139,17 @@ public class Othello {
 		Random rand = new Random();
 
 
-		Othello o = new Othello();
-		System.out.println(o.getBoardString());
-		while(!o.isGameOver()) {
-			int row = rand.nextInt(8);
-			int col = rand.nextInt(8);
-
-			if(o.move(row, col)) {
-				System.out.println("makes move ("+row+","+col+")");
-				System.out.println(o.getBoardString()+ o.getWhosTurn()+" moves next");
-			}
-		}
+//		Othello o = new Othello();
+//		System.out.println(o.getBoardString());
+//		while(!o.isGameOver()) {
+//			int row = rand.nextInt(8);
+//			int col = rand.nextInt(8);
+//
+//			if(o.move(row, col)) {
+//				System.out.println("makes move ("+row+","+col+")");
+//				System.out.println(o.getBoardString()+ o.getWhosTurn()+" moves next");
+//			}
+//		}
 
 	}
 }

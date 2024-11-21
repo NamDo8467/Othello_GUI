@@ -1,4 +1,12 @@
 package ca.yorku.eecs3311.othello.model;
+
+import javafx.scene.control.Label;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
+
 /**
  * Keep track of all of the tokens on the board. This understands some
  * interesting things about an Othello board, what the board looks like at the
@@ -18,18 +26,79 @@ public class OthelloBoard {
 	public static final char EMPTY = ' ', P1 = 'X', P2 = 'O', BOTH = 'B';
 	private int dim = 8;
 	private char[][] board;
+	public GridPane gridBoard;
+	public Stage stage;
+	public static final int CELL_HEIGHT = 70;
+	public static final int CELL_WIDTH = 70;
 
 	public OthelloBoard(int dim) {
 		this.dim = dim;
+		gridBoard = new GridPane();
+//		gridBoard.add(gameNameLabel, 0, 0);
 		board = new char[this.dim][this.dim];
 		for (int row = 0; row < this.dim; row++) {
 			for (int col = 0; col < this.dim; col++) {
+				
+		
 				this.board[row][col] = EMPTY;
 			}
 		}
+		int col = 0;
+		int row = 0;
+		
+		
+		String information = new String("" + row + ", " + col);
+		Label cell = new Label(information);				
+		
+		RowConstraints cellHeight = new RowConstraints();
+		
+		ColumnConstraints cellWidth = new ColumnConstraints();
+		
+		gridBoard.add(cell, col, row);
+		gridBoard.getRowConstraints().add(cellHeight);
+		cellHeight.setPrefHeight(CELL_HEIGHT);
+		
+		gridBoard.getColumnConstraints().add(cellWidth);
+		cellWidth.setPrefWidth(CELL_WIDTH);
+		
+		
+		
+		
+		String information1 = new String("" + 1 + ", " + col);
+		Label cell1 = new Label(information1);				
+		
+		RowConstraints cellHeight1 = new RowConstraints();
+		
+		ColumnConstraints cellWidth1 = new ColumnConstraints();
+		
+		gridBoard.add(cell1, 0, 1);
+		gridBoard.getRowConstraints().add(cellHeight1);
+		cellHeight1.setPrefHeight(CELL_HEIGHT);
+		
+		gridBoard.getColumnConstraints().add(cellWidth1);
+		cellWidth1.setPrefWidth(CELL_WIDTH);
+		
+		
+		String information2 = new String("" + 2 + ", " + col);
+		Label cell2 = new Label(information2);				
+		
+		RowConstraints cellHeight2 = new RowConstraints();
+		
+		ColumnConstraints cellWidth2 = new ColumnConstraints();
+		
+		gridBoard.add(cell2, 0, 2);
+		gridBoard.getRowConstraints().add(cellHeight2);
+		cellHeight2.setPrefHeight(CELL_HEIGHT);
+		
+		gridBoard.getColumnConstraints().add(cellWidth2);
+		cellWidth2.setPrefWidth(CELL_WIDTH);
+		gridBoard.setGridLinesVisible(true);
 		int mid = this.dim / 2;
 		this.board[mid - 1][mid - 1] = this.board[mid][mid] = P1;
 		this.board[mid][mid - 1] = this.board[mid - 1][mid] = P2;
+		
+
+
 	}
 
 	/**
