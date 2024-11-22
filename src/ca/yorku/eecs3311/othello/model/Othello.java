@@ -1,9 +1,21 @@
 package ca.yorku.eecs3311.othello.model;
+import ca.yorku.eecs3311.othello.viewcontroller.VScoreAndTurn;
 import ca.yorku.eecs3311.othello.viewcontroller.OthelloApplication;
-import ca.yorku.eecs3311.util.*;
+import ca.yorku.eecs3311.util.Observable;
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -20,7 +32,7 @@ import java.util.Random;
  * @author student
  *
  */
-public class Othello {
+public class Othello extends Observable {
 	public static final int DIMENSION=8; // This is an 8x8 game
 	
 	private OthelloBoard board=new OthelloBoard(Othello.DIMENSION);
@@ -29,8 +41,34 @@ public class Othello {
 
 	
 	public void setGameGrid(Stage stage) {
-		Scene scene = new Scene(this.board.gridBoard, OthelloApplication.SCENE_WIDTH, OthelloApplication.SCENE_HEIGHT);
+//		Scene scene = new Scene(this.board.gridBoard, OthelloApplication.SCENE_WIDTH, OthelloApplication.SCENE_HEIGHT);
+
+		
+		BorderPane bp = new BorderPane();
+		VScoreAndTurn score = new VScoreAndTurn();
+		
+		bp.setCenter(this.board.gridBoard);
+		bp.setBottom(score);
+		
+		this.attach(score);
+		Scene scene = new Scene(bp, OthelloApplication.SCENE_WIDTH, OthelloApplication.SCENE_HEIGHT);
+
+		
+
 		stage.setScene(scene);
+
+	}
+	
+	protected ArrayList<Rectangle> getCells() {
+		return this.board.cells;
+	}
+	
+	protected OthelloBoard getBoard() {
+		return this.board;
+	}
+	
+	protected char[][] getBoardArray() {
+		return this.board.board;
 	}
 	
 	
@@ -65,10 +103,14 @@ public class Othello {
 	 */
 	public boolean move(int row, int col) {
 		if(this.board.move(row, col, this.whosTurn)) {
+			System.out.println("I started with: " + this.whosTurn);
+            
 			this.whosTurn = OthelloBoard.otherPlayer(this.whosTurn);
 			char allowedMove = board.hasMove();
+			System.out.println("Change to: " + this.whosTurn);
 			if(allowedMove!=OthelloBoard.BOTH)this.whosTurn=allowedMove;
 			this.numMoves++;
+			this.notifyObservers();
 			return true;
 		} else {
 			return false;
@@ -139,17 +181,17 @@ public class Othello {
 		Random rand = new Random();
 
 
-//		Othello o = new Othello();
-//		System.out.println(o.getBoardString());
-//		while(!o.isGameOver()) {
-//			int row = rand.nextInt(8);
-//			int col = rand.nextInt(8);
-//
-//			if(o.move(row, col)) {
-//				System.out.println("makes move ("+row+","+col+")");
-//				System.out.println(o.getBoardString()+ o.getWhosTurn()+" moves next");
-//			}
-//		}
+		Othello o = new Othello();
+		System.out.println(o.getBoardString());
+		while(!o.isGameOver()) {
+			int row = rand.nextInt(8);
+			int col = rand.nextInt(8);
+
+			if(o.move(row, col)) {
+				System.out.println("makes move ("+row+","+col+")");
+				System.out.println(o.getBoardString()+ o.getWhosTurn()+" moves next");
+			}
+		}
 
 	}
 }
