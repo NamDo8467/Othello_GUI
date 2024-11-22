@@ -26,9 +26,12 @@ public class CButtonPressEventHandler implements EventHandler<ActionEvent> {
 			othello.play();
 //			othello.setGameGrid(this.stage);
 		} else if(source.getText()=="Player vs AI") {
+			othello.play();
 //			mcounter.decrement();
 		} else if(source.getText() == "Player vs Random") {
 			
+		}else {
+			System.out.println("hdskjfhkadsf");
 		}
 		
 	}
