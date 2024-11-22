@@ -1,9 +1,19 @@
 package ca.yorku.eecs3311.othello.model;
 
+import java.util.ArrayList;
+
+import javafx.event.EventHandler;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.control.Label;
+
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -25,11 +35,13 @@ import javafx.stage.Stage;
 public class OthelloBoard {
 	public static final char EMPTY = ' ', P1 = 'X', P2 = 'O', BOTH = 'B';
 	private int dim = 8;
-	private char[][] board;
+	protected char[][] board;
+	public ArrayList<Rectangle> cells;
 	public GridPane gridBoard;
 	public Stage stage;
 	public static final int CELL_HEIGHT = 70;
 	public static final int CELL_WIDTH = 70;
+	public static final int CELL_SIZE = 70;
 
 	public OthelloBoard(int dim) {
 		this.dim = dim;
@@ -43,62 +55,59 @@ public class OthelloBoard {
 				this.board[row][col] = EMPTY;
 			}
 		}
-		int col = 0;
-		int row = 0;
-		
-		
-		String information = new String("" + row + ", " + col);
-		Label cell = new Label(information);				
-		
-		RowConstraints cellHeight = new RowConstraints();
-		
-		ColumnConstraints cellWidth = new ColumnConstraints();
-		
-		gridBoard.add(cell, col, row);
-		gridBoard.getRowConstraints().add(cellHeight);
-		cellHeight.setPrefHeight(CELL_HEIGHT);
-		
-		gridBoard.getColumnConstraints().add(cellWidth);
-		cellWidth.setPrefWidth(CELL_WIDTH);
-		
-		
-		
-		
-		String information1 = new String("" + 1 + ", " + col);
-		Label cell1 = new Label(information1);				
-		
-		RowConstraints cellHeight1 = new RowConstraints();
-		
-		ColumnConstraints cellWidth1 = new ColumnConstraints();
-		
-		gridBoard.add(cell1, 0, 1);
-		gridBoard.getRowConstraints().add(cellHeight1);
-		cellHeight1.setPrefHeight(CELL_HEIGHT);
-		
-		gridBoard.getColumnConstraints().add(cellWidth1);
-		cellWidth1.setPrefWidth(CELL_WIDTH);
-		
-		
-		String information2 = new String("" + 2 + ", " + col);
-		Label cell2 = new Label(information2);				
-		
-		RowConstraints cellHeight2 = new RowConstraints();
-		
-		ColumnConstraints cellWidth2 = new ColumnConstraints();
-		
-		gridBoard.add(cell2, 0, 2);
-		gridBoard.getRowConstraints().add(cellHeight2);
-		cellHeight2.setPrefHeight(CELL_HEIGHT);
-		
-		gridBoard.getColumnConstraints().add(cellWidth2);
-		cellWidth2.setPrefWidth(CELL_WIDTH);
-		gridBoard.setGridLinesVisible(true);
+
+		cells = new ArrayList<Rectangle>();
 		int mid = this.dim / 2;
 		this.board[mid - 1][mid - 1] = this.board[mid][mid] = P1;
 		this.board[mid][mid - 1] = this.board[mid - 1][mid] = P2;
+		for (int row = 0; row < dim; row++) {
+            for (int col = 0; col < dim; col++) {
+                Rectangle tile = new Rectangle(CELL_WIDTH, CELL_HEIGHT);
+                
+                // Set color for a checkerboard pattern
+                tile.setFill((row + col) % 2 == 0 ? Color.GREEN : Color.DARKGREEN);
+                
+                gridBoard.add(tile, col, row);
+                
+                
+                addTheFirst4Token(row, col);
+                
+                
+                
+                cells.add(tile);
+            }
+
+	
+
+		     }
+		 
+		gridBoard.setAlignment(Pos.CENTER);
 		
+		gridBoard.setGridLinesVisible(true);
 
+	}
+	
+	public void addTheFirst4Token(int row, int col) {
+		if (row == 3 && col == 3 || row == 4 && col == 4) { 
+        	Circle token = new Circle(CELL_SIZE / 2 - 5);
+            
+            token.setFill(Color.BLACK);
+            gridBoard.add(token, col, row);
+            GridPane.setHalignment(token, HPos.CENTER);
+            GridPane.setValignment(token, VPos.CENTER);
+                       
+		}
 
+        if(row == 4 && col == 3 || row == 3 && col == 4 ) {
+        	Circle token = new Circle(CELL_SIZE / 2 - 5);
+            
+            token.setFill(Color.WHITE);
+            gridBoard.add(token, col, row);
+            GridPane.setHalignment(token, HPos.CENTER);
+            GridPane.setValignment(token, VPos.CENTER);
+            
+            
+        }
 	}
 
 	/**
