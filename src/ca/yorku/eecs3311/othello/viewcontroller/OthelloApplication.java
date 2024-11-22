@@ -24,7 +24,7 @@ public class OthelloApplication extends Application {
 	final int BUTTON_WIDTH = 120;
 	final int GAME_NAME_LABEL_HEIGHT = 40;
 	final int GAME_NAME_LABEL_WIDTH = 120;
-	public static final int SCENE_HEIGHT = 560;
+	public static final int SCENE_HEIGHT = 600;
 	public static final int SCENE_WIDTH = 560;
 	
 	@Override
@@ -33,11 +33,11 @@ public class OthelloApplication extends Application {
 		
 		// MODEL
 		Othello othello = new Othello();
-		OthelloControllerHumanVSHuman playerVSPlayerController = new OthelloControllerHumanVSHuman();
+		OthelloControllerHumanVSHuman playerVSPlayerController = new OthelloControllerHumanVSHuman(stage);
 		
 		// CONTROLLER
 		// CONTROLLER->MODEL hookup
-		CButtonPressEventHandler cpresshandler= new CButtonPressEventHandler(othello, stage);
+		CButtonPressEventHandler cpresshandler= new CButtonPressEventHandler(playerVSPlayerController, stage);
 	
 		// VIEW
 		Label gameNameLabel = new Label("Othello");
@@ -54,6 +54,7 @@ public class OthelloApplication extends Application {
 		// VIEW->CONTROLLER hookup
 		vPlayerVSPlayerButton.setOnAction(cpresshandler);
 		// MODEL->VIEW hookup
+		
 		
 		GridPane grid = new GridPane();
 		
@@ -74,7 +75,6 @@ public class OthelloApplication extends Application {
 		}
 		
 		for(Button button:buttonArray) {
-
 			button.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 			button.setFocusTraversable(false);
 			GridPane.setHalignment(button, HPos.CENTER);
