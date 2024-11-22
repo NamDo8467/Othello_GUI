@@ -65,14 +65,14 @@ public abstract class OthelloController {
 	
 	protected void handleMove(int row, int col, GridPane gridBoard) {
 		if (this.othello.isGameOver() == false) {
-			System.out.println(othello.getWhosTurn());
+//			System.out.println(othello.getWhosTurn());
 			char whosTurn = othello.getWhosTurn();
 			Move move = null;
 			move = new Move(row, col);
 			
 			boolean canMove = othello.move(move.getRow(), move.getCol());
-			String boardString = this.othello.getBoardString();
-			System.out.println(boardString);
+//			String boardString = this.othello.getBoardString();
+//			System.out.println(boardString);
 			if (canMove) {
 				char [][] boardArray = this.othello.getBoardArray();
 				
@@ -92,9 +92,13 @@ public abstract class OthelloController {
 		        GridPane.setHalignment(piece, HPos.CENTER);
 		        GridPane.setValignment(piece, VPos.CENTER);
 		        
+		        if (player2 instanceof PlayerGreedy) {
+					Move greedyMove = this.handleMoveGreedy();
+					this.othello.move(greedyMove.getRow(), greedyMove.getCol());
+				}
 		        
 		        
-		        
+		        // Update the GUI based on the board string array
 		        for (int r = 0; r < boardArray.length; r++) {
 					for(int c = 0; c < boardArray[0].length; c++) {
 						Color updatedColor = Color.RED;
@@ -122,7 +126,13 @@ public abstract class OthelloController {
 				}
 			}
 			
+		}else {
+			this.othello.notifyObservers();
 		}
+	}
+	
+	protected Move handleMoveGreedy() {
+		return player2.getMove();
 	}
 	
 
