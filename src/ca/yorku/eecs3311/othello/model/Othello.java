@@ -47,6 +47,7 @@ public class Othello extends Observable {
 		BorderPane bp = new BorderPane();
 		VScoreAndTurn score = new VScoreAndTurn();
 		
+		
 		bp.setCenter(this.board.gridBoard);
 		bp.setBottom(score);
 		
@@ -58,6 +59,7 @@ public class Othello extends Observable {
 		stage.setScene(scene);
 
 	}
+	
 	
 	protected ArrayList<Rectangle> getCells() {
 		return this.board.cells;
@@ -103,11 +105,11 @@ public class Othello extends Observable {
 	 */
 	public boolean move(int row, int col) {
 		if(this.board.move(row, col, this.whosTurn)) {
-			System.out.println("I started with: " + this.whosTurn);
+//			System.out.println("I started with: " + this.whosTurn);
             
 			this.whosTurn = OthelloBoard.otherPlayer(this.whosTurn);
 			char allowedMove = board.hasMove();
-			System.out.println("Change to: " + this.whosTurn);
+//			System.out.println("Change to: " + this.whosTurn);
 			if(allowedMove!=OthelloBoard.BOTH)this.whosTurn=allowedMove;
 			this.numMoves++;
 			this.notifyObservers();
