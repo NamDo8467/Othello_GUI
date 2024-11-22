@@ -34,10 +34,12 @@ public class OthelloApplication extends Application {
 		// MODEL
 		Othello othello = new Othello();
 		OthelloControllerHumanVSHuman playerVSPlayerController = new OthelloControllerHumanVSHuman(stage);
+		OthelloControllerHumanVSGreedy playerVSAI = new OthelloControllerHumanVSGreedy(stage);
 		
 		// CONTROLLER
 		// CONTROLLER->MODEL hookup
-		CButtonPressEventHandler cpresshandler= new CButtonPressEventHandler(playerVSPlayerController, stage);
+//		CButtonPressEventHandler cpresshandler= new CButtonPressEventHandler(playerVSPlayerController, stage);
+		CButtonPressEventHandler cpresshandler= new CButtonPressEventHandler(playerVSAI, stage);
 	
 		// VIEW
 		Label gameNameLabel = new Label("Othello");
@@ -53,6 +55,7 @@ public class OthelloApplication extends Application {
 		
 		// VIEW->CONTROLLER hookup
 		vPlayerVSPlayerButton.setOnAction(cpresshandler);
+		vPlayerVSAIButton.setOnAction(cpresshandler);
 		// MODEL->VIEW hookup
 		
 		
