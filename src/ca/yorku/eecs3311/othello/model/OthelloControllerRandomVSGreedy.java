@@ -1,5 +1,7 @@
 package ca.yorku.eecs3311.othello.model;
 
+import javafx.stage.Stage;
+
 /**
  * The goal here is to print out the probability that Random wins and Greedy
  * wins as a result of playing 10000 games against each other with P1=Random and
