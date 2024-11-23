@@ -4,8 +4,8 @@ import javafx.stage.Stage;
 
 public abstract class OthelloControllerVerbose extends OthelloController {
 	
-	public OthelloControllerVerbose (Stage stage) {
-		super(stage);
+	public OthelloControllerVerbose () {
+		super();
 	}
 	protected void reportMove(char whosTurn, Move move) {
 		System.out.println(whosTurn + " makes move " + move + "\n");
