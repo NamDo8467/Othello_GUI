@@ -1,5 +1,8 @@
 package ca.yorku.eecs3311.othello.model;
 
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+
 /**
  * This controller uses the Model classes to allow the Human player P1 to play
  * the computer P2. The computer, P2 uses a random strategy. 
@@ -7,7 +10,7 @@ package ca.yorku.eecs3311.othello.model;
  * @author student
  *
  */
-public class OthelloControllerHumanVSRandom extends OthelloControllerVerbose {
+public class OthelloControllerHumanVSRandom extends OthelloControllerVerbose implements ControllerTypeInterface {
 
 	/**
 	 * Constructs a new OthelloController with a new Othello game.
@@ -18,7 +21,12 @@ public class OthelloControllerHumanVSRandom extends OthelloControllerVerbose {
 		this.player1 = new PlayerHuman(this.othello, OthelloBoard.P1);
 		this.player2 = new PlayerRandom(this.othello, OthelloBoard.P2);
 	}
-
+	
+	@Override
+	public void handleMove(int row, int col, GridPane gridBoard, Othello othello) {
+		// TODO Auto-generated method stub
+		
+	}
 	/**
 	 * Run main to play a Human (P1) against the computer P2. 
 	 * The computer uses a random strategy, that is, it randomly picks 
@@ -28,9 +36,11 @@ public class OthelloControllerHumanVSRandom extends OthelloControllerVerbose {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		OthelloControllerHumanVSRandom oc = new OthelloControllerHumanVSRandom();
-		oc.play();
+//		OthelloControllerHumanVSRandom oc = new OthelloControllerHumanVSRandom();
+//		oc.play();
 	}
+
+
 
 }
 
