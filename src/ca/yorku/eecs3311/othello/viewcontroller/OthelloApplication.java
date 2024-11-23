@@ -33,13 +33,12 @@ public class OthelloApplication extends Application {
 		
 		// MODEL
 		Othello othello = new Othello();
-		OthelloControllerHumanVSHuman playerVSPlayerController = new OthelloControllerHumanVSHuman(stage);
-		OthelloControllerHumanVSGreedy playerVSAI = new OthelloControllerHumanVSGreedy(stage);
+		OthelloControllerHumanVSAny othelloController = new OthelloControllerHumanVSAny(stage);
 		
 		// CONTROLLER
 		// CONTROLLER->MODEL hookup
 //		CButtonPressEventHandler cpresshandler= new CButtonPressEventHandler(playerVSPlayerController, stage);
-		CButtonPressEventHandler cpresshandler= new CButtonPressEventHandler(playerVSAI, stage);
+		CButtonPressEventHandler cpresshandler= new CButtonPressEventHandler(othelloController);
 	
 		// VIEW
 		Label gameNameLabel = new Label("Othello");

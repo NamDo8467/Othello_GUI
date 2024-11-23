@@ -1,7 +1,10 @@
 package ca.yorku.eecs3311.othello.viewcontroller;
 import ca.yorku.eecs3311.othello.model.Othello;
 import ca.yorku.eecs3311.othello.model.OthelloController;
+import ca.yorku.eecs3311.othello.model.OthelloControllerHumanVSAny;
+import ca.yorku.eecs3311.othello.model.OthelloControllerHumanVSGreedy;
 import ca.yorku.eecs3311.othello.model.OthelloControllerHumanVSHuman;
+import ca.yorku.eecs3311.othello.model.OthelloControllerHumanVSRandom;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -11,28 +14,45 @@ import javafx.stage.Stage;
 
 public class CButtonPressEventHandler implements EventHandler<ActionEvent> {
 	
-	private Stage stage;
-	private OthelloController othello;
-	public CButtonPressEventHandler(OthelloController othello, Stage stage) {
-		this.othello = othello;
-		this.stage = stage;
+//	private Stage stage;
+	private OthelloControllerHumanVSAny othelloController;
+	public CButtonPressEventHandler(OthelloControllerHumanVSAny othelloController) {
+		this.othelloController = othelloController;
+//		this.stage = stage;
 	}
 
 	@Override
 	public void handle(ActionEvent event) {
 		Button source=(Button)event.getSource();
-		if(source.getText()=="Player vs Player") {
-//			OthelloControllerHumanVSHuman oc = new OthelloControllerHumanVSHuman(stage);
-			othello.play();
-//			othello.setGameGrid(this.stage);
-		} else if(source.getText()=="Player vs AI") {
-			othello.play();
-//			mcounter.decrement();
-		} else if(source.getText() == "Player vs Random") {
+		
+		if (source.getText() == "Player vs Player") {
 			
-		}else {
-			System.out.println("hdskjfhkadsf");
+			othelloController.setControllerType(new OthelloControllerHumanVSHuman());
+			
+		}else if(source.getText() == "Player vs AI") {
+			
+			othelloController.setControllerType(new OthelloControllerHumanVSGreedy());
+			
+		}else if(source.getText() == "Player vs Random") {
+			
+			othelloController.setControllerType(new OthelloControllerHumanVSRandom());
+			
 		}
+		this.othelloController.play();
+		
+		
+//		if(source.getText()=="Player vs Player") {
+////			OthelloControllerHumanVSHuman oc = new OthelloControllerHumanVSHuman(stage);
+//			othelloController.play();
+////			othelloController.setGameGrid(this.stage);
+//		} else if(source.getText()=="Player vs AI") {
+//			othelloController.play();
+////			mcounter.decrement();
+//		} else if(source.getText() == "Player vs Random") {
+//			
+//		}else {
+//			System.out.println("hdskjfhkadsf");
+//		}
 		
 	}
 	
