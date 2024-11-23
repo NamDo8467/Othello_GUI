@@ -105,11 +105,11 @@ public class Othello extends Observable {
 	 */
 	public boolean move(int row, int col) {
 		if(this.board.move(row, col, this.whosTurn)) {
-//			System.out.println("I started with: " + this.whosTurn);
+			System.out.println("I started with: " + this.whosTurn);
             
 			this.whosTurn = OthelloBoard.otherPlayer(this.whosTurn);
 			char allowedMove = board.hasMove();
-//			System.out.println("Change to: " + this.whosTurn);
+			System.out.println("Change to: " + this.whosTurn);
 			if(allowedMove!=OthelloBoard.BOTH)this.whosTurn=allowedMove;
 			this.numMoves++;
 			this.notifyObservers();
