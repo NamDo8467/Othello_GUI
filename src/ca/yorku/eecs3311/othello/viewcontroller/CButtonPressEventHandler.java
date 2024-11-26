@@ -27,11 +27,11 @@ public class CButtonPressEventHandler implements EventHandler<ActionEvent> {
 		
 		if (source.getText() == "Player vs Player") {
 			
-			othelloController.setControllerType(new OthelloControllerHumanVSHuman());
+			othelloController.setControllerType(new OthelloControllerHumanVSHuman(this.othelloController.othello));
 			
 		}else if(source.getText() == "Player vs AI") {
 			
-			othelloController.setControllerType(new OthelloControllerHumanVSGreedy());
+			othelloController.setControllerType(new OthelloControllerHumanVSGreedy(this.othelloController.othello));
 			
 		}else if(source.getText() == "Player vs Random") {
 			
