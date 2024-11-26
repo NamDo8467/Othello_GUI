@@ -14,6 +14,7 @@ public abstract class OthelloController {
 
 	protected Othello othello;
 	public ControllerTypeInterface controllerType;
+	protected HistoryStack historyStack;
 	Player player1, player2;
 	
 	/**
@@ -23,28 +24,20 @@ public abstract class OthelloController {
 	public Stage stage;
 	public OthelloController() {
 		this.othello = new Othello();
+		this.historyStack = new HistoryStack();
 //		this.stage = stage;
-//		this.whosTurn = this.othello.getWhosTurn();
-//		this.othello.setGameGrid(stage);
 	}
-	
-	
-	
-//	public OthelloController() {
-//		// TODO Auto-generated constructor stub
-//	}
 
 	public void play() {
-		this.othello.setGameGrid(this.stage);
-		ArrayList<Rectangle> cells = this.othello.getCells();
-		GridPane gridBoard = this.othello.getBoard().gridBoard;
-		for(Rectangle cell:cells) {
-			cell.setOnMouseClicked((MouseEvent event) -> {
-				int row = GridPane.getRowIndex(cell);
-				int col = GridPane.getColumnIndex(cell);
-//				this.controllerType.handleMove(row, col, gridBoard);
-			});
-		}
+//		this.othello.setGameGrid(this.stage);
+//		ArrayList<Rectangle> cells = this.othello.getCells();
+//		GridPane gridBoard = this.othello.getBoard().gridBoard;
+//		for(Rectangle cell:cells) {
+//			cell.setOnMouseClicked((MouseEvent event) -> {
+//				int row = GridPane.getRowIndex(cell);
+//				int col = GridPane.getColumnIndex(cell);
+//			});
+//		}
 				
 //		if(whosTurn==OthelloBoard.P1)move = player1.getMove();
 //		if(whosTurn==OthelloBoard.P2)move = player2.getMove();
