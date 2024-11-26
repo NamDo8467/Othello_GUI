@@ -25,19 +25,19 @@ public class OthelloApplication extends Application {
 	final int GAME_NAME_LABEL_HEIGHT = 40;
 	final int GAME_NAME_LABEL_WIDTH = 120;
 	public static final int SCENE_HEIGHT = 600;
-	public static final int SCENE_WIDTH = 560;
+	public static final int SCENE_WIDTH = 640;
 	
 	@Override
 	public void start(Stage stage) throws Exception {
 		// Create and hook up the Model, View and the controller
 		
 		// MODEL
-		Othello othello = new Othello();
-		OthelloControllerHumanVSAny othelloController = new OthelloControllerHumanVSAny(stage);
+		Othello othello = new Othello();		
+		OthelloControllerHumanVSAny othelloController = new OthelloControllerHumanVSAny(stage, othello);
+//		OthelloControllerHumanVSAny othelloController = new OthelloControllerHumanVSAny();
 		
 		// CONTROLLER
 		// CONTROLLER->MODEL hookup
-//		CButtonPressEventHandler cpresshandler= new CButtonPressEventHandler(playerVSPlayerController, stage);
 		CButtonPressEventHandler cpresshandler= new CButtonPressEventHandler(othelloController);
 	
 		// VIEW
