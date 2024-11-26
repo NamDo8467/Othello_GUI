@@ -23,6 +23,7 @@ public class VScoreAndTurn extends Label implements Observer {
 	@Override
 	public void update(Observable o) {
 		Othello othello = (Othello) o;
+//		System.out.println(othello);
 //		String turn = "";
 //		String winner = "";
 		if (othello.isGameOver() == true) {
