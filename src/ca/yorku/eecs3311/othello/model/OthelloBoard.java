@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 
 import javafx.scene.layout.ColumnConstraints;
@@ -37,6 +38,7 @@ public class OthelloBoard {
 	private int dim = 8;
 	protected char[][] board;
 	public ArrayList<Rectangle> cells;
+	public ArrayList<Circle> tokens;
 	public GridPane gridBoard;
 	public Stage stage;
 	public static final int CELL_HEIGHT = 70;
@@ -46,7 +48,6 @@ public class OthelloBoard {
 	public OthelloBoard(int dim) {
 		this.dim = dim;
 		gridBoard = new GridPane();
-//		gridBoard.add(gameNameLabel, 0, 0);
 		board = new char[this.dim][this.dim];
 		for (int row = 0; row < this.dim; row++) {
 			for (int col = 0; col < this.dim; col++) {
@@ -57,6 +58,7 @@ public class OthelloBoard {
 		}
 
 		cells = new ArrayList<Rectangle>();
+		tokens = new ArrayList<Circle>();
 		int mid = this.dim / 2;
 		this.board[mid - 1][mid - 1] = this.board[mid][mid] = P1;
 		this.board[mid][mid - 1] = this.board[mid - 1][mid] = P2;
@@ -84,25 +86,29 @@ public class OthelloBoard {
 		gridBoard.setAlignment(Pos.CENTER);
 		
 		gridBoard.setGridLinesVisible(true);
-
 	}
 	
 	public void addTheFirst4Token(int row, int col) {
-		if (row == 3 && col == 3 || row == 4 && col == 4) { 
+		
+		if ((row == 3 && col == 3) || (row == 4 && col == 4)) {
+//			System.out.println("Row: " + row + " Col: " + col);
         	Circle token = new Circle(CELL_SIZE / 2 - 5);
             
             token.setFill(Color.BLACK);
             gridBoard.add(token, col, row);
+            tokens.add(token);
             GridPane.setHalignment(token, HPos.CENTER);
             GridPane.setValignment(token, VPos.CENTER);
                        
 		}
 
-        if(row == 4 && col == 3 || row == 3 && col == 4 ) {
+        if((row == 4 && col == 3) || (row == 3 && col == 4)) {
+//        	System.out.println("Row: " + row + " Col: " + col);
         	Circle token = new Circle(CELL_SIZE / 2 - 5);
             
             token.setFill(Color.WHITE);
             gridBoard.add(token, col, row);
+            tokens.add(token);
             GridPane.setHalignment(token, HPos.CENTER);
             GridPane.setValignment(token, VPos.CENTER);
             
@@ -300,6 +306,49 @@ public class OthelloBoard {
 			return true;
 		}
 		return false;
+	}
+	
+	/***
+	 * This method adds the token to the current token list
+	 * @param token
+	 * 
+	 */
+	public void addTokenTokenList(Circle token) {
+		this.tokens.add(token);
+//		System.out.println("Tokens: " + this.tokens.size());
+	}
+	
+	/**
+	 * This method reset the whole board to the beginning
+	 * 
+	 * */
+	public void resetBoard() {
+
+//		System.out.println("Tokens: " + this.tokens.size());
+//		System.out.println("Before delete: ");
+//		System.out.println(this.gridBoard.getChildren());
+		this.gridBoard.getChildren().removeAll(tokens);
+		while (tokens.size() > 0) {
+			tokens.remove(0);
+		}
+		
+		for (int row = 0; row < this.dim; row++) {
+			for (int col = 0; col < this.dim; col++) {
+				this.board[row][col] = EMPTY;
+				 addTheFirst4Token(row, col);
+			}
+		}
+		int mid = this.dim / 2;
+		this.board[mid - 1][mid - 1] = this.board[mid][mid] = P1;
+		this.board[mid][mid - 1] = this.board[mid - 1][mid] = P2;
+		
+		
+//		System.out.println("After delete: ");
+//		System.out.println(this.gridBoard.getChildren());
+//		tokens.remove
+//		for(Node n:this.gridBoard.getChildren()) {
+//			System.out.println(n);
+//		}
 	}
 
 	/**
