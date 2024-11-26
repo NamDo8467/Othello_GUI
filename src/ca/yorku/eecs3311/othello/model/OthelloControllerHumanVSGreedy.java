@@ -5,7 +5,6 @@ import javafx.geometry.VPos;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
 
 /**
  * This controller uses the Model classes to allow the Human player P1 to play
@@ -14,18 +13,18 @@ import javafx.stage.Stage;
  * @author student
  *
  */
-public class OthelloControllerHumanVSGreedy extends OthelloControllerVerbose  implements ControllerTypeInterface {
+public class OthelloControllerHumanVSGreedy extends OthelloControllerVerbose implements ControllerTypeInterface {
 
-	public OthelloControllerHumanVSGreedy() {
-		super();
-		this.player1 = new PlayerHuman(this.othello, OthelloBoard.P1);
-		this.player2 = new PlayerGreedy(this.othello, OthelloBoard.P2);
+	public OthelloControllerHumanVSGreedy(Othello othello) {
+		this.player1 = new PlayerHuman(othello, OthelloBoard.P1);
+		this.player2 = new PlayerGreedy(othello, OthelloBoard.P2);
+		
 	}
 	
 	@Override
 	public void handleMove(int row, int col, GridPane gridBoard, Othello othello) {
-		PlayerHuman player1 = new PlayerHuman(othello, OthelloBoard.P1);
-		PlayerGreedy player2 = new PlayerGreedy(othello, OthelloBoard.P2);
+		this.player1 = new PlayerHuman(othello, OthelloBoard.P1);
+		this.player2 = new PlayerGreedy(othello, OthelloBoard.P2);
 		
 		if (othello.isGameOver() == false) {
 			char whosTurn = othello.getWhosTurn();
@@ -44,17 +43,20 @@ public class OthelloControllerHumanVSGreedy extends OthelloControllerVerbose  im
 					color = Color.WHITE;
 				}
 
-				Circle piece = new Circle(70 / 2 - 5);
-		        piece.setFill(color);
-		        gridBoard.add(piece, col, row);
+				Circle token = new Circle(70 / 2 - 5);
+		        token.setFill(color);
+		        gridBoard.add(token, col, row);
+		        othello.addTokenToTokenList(token);
+		        
 		        
 		        // Center the piece in the cell
-		        GridPane.setHalignment(piece, HPos.CENTER);
-		        GridPane.setValignment(piece, VPos.CENTER);
+		        GridPane.setHalignment(token, HPos.CENTER);
+		        GridPane.setValignment(token, VPos.CENTER);
 		        
 		        // Player2 makes a move
-		        Move greedyMove = player2.getMove();
+		        Move greedyMove = this.player2.getMove();
 		        othello.move(greedyMove.getRow(), greedyMove.getCol());
+		        
 		        
 		        // Update the GUI based on the board string array
 		        for (int r = 0; r < boardArray.length; r++) {
@@ -62,22 +64,24 @@ public class OthelloControllerHumanVSGreedy extends OthelloControllerVerbose  im
 						Color updatedColor = Color.RED;
 						if (boardArray[r][c] == OthelloBoard.P1) {
 							updatedColor = Color.BLACK;
-							Circle updatedPiece = new Circle(70 / 2 - 5);
-					        updatedPiece.setFill(updatedColor);
-					        gridBoard.add(updatedPiece, c, r);
+							Circle updatedToken = new Circle(70 / 2 - 5);
+					        updatedToken.setFill(updatedColor);
+					        gridBoard.add(updatedToken, c, r);
+					        othello.addTokenToTokenList(updatedToken);
 
 					     // Center the piece in the cell
-					        GridPane.setHalignment(updatedPiece, HPos.CENTER);
-					        GridPane.setValignment(updatedPiece, VPos.CENTER);
+					        GridPane.setHalignment(updatedToken, HPos.CENTER);
+					        GridPane.setValignment(updatedToken, VPos.CENTER);
 							
 						}else if(boardArray[r][c] == OthelloBoard.P2){
 							updatedColor = Color.WHITE;
-							Circle updatedPiece = new Circle(70 / 2 - 5);
-					        updatedPiece.setFill(updatedColor);
-					        gridBoard.add(updatedPiece, c, r);
+							Circle updatedToken = new Circle(70 / 2 - 5);
+					        updatedToken.setFill(updatedColor);
+					        gridBoard.add(updatedToken, c, r);
+					        othello.addTokenToTokenList(updatedToken);
 					     // Center the piece in the cell
-					        GridPane.setHalignment(updatedPiece, HPos.CENTER);
-					        GridPane.setValignment(updatedPiece, VPos.CENTER);
+					        GridPane.setHalignment(updatedToken, HPos.CENTER);
+					        GridPane.setValignment(updatedToken, VPos.CENTER);
 						}
 
 					}
