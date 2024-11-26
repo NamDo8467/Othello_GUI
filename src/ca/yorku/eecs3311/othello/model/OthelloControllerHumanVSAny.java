@@ -8,21 +8,23 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class OthelloControllerHumanVSAny {
-	protected Othello othello;
+	public Othello othello;
 	public ControllerTypeInterface controllerType;
-	Player player1, player2;
-	
 	public Stage stage;
-	public OthelloControllerHumanVSAny(Stage stage, ControllerTypeInterface controllerType) {
-		this.othello = new Othello();
+	public OthelloControllerHumanVSAny(Stage stage, ControllerTypeInterface controllerType)  {
+		super();
 		this.controllerType = controllerType;
-		this.stage = stage;
 
 	}
 	
-	public OthelloControllerHumanVSAny(Stage stage) {
-		this.othello = new Othello();
+	public OthelloControllerHumanVSAny() {
+	}
+	
+	public OthelloControllerHumanVSAny(Stage stage, Othello othello) {
+		super();
+		this.othello = othello;
 		this.stage = stage;
+
 	}
 	
 	public void setControllerType(ControllerTypeInterface controllerType) {
@@ -30,15 +32,13 @@ public class OthelloControllerHumanVSAny {
 	}
 	
 	public void play() {
-		this.othello.setGameGrid(this.stage);
-		System.out.println(this.othello.getObserversSize());
+		this.othello.setGameGrid(this.stage);		
 		ArrayList<Rectangle> cells = this.othello.getCells();
 		GridPane gridBoard = this.othello.getBoard().gridBoard;
 		for(Rectangle cell:cells) {
 			cell.setOnMouseClicked((MouseEvent event) -> {
 				int row = GridPane.getRowIndex(cell);
 				int col = GridPane.getColumnIndex(cell);
-//				System.out.println(this.othello);
 				this.controllerType.handleMove(row, col, gridBoard, this.othello);
 				
 			});
