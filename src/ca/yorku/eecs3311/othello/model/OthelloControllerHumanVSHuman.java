@@ -6,7 +6,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-
 /**
  * Run the main from this class to play two humans against eachother. Only
  * minimal modifications to this class are permitted.
@@ -22,7 +21,6 @@ public class OthelloControllerHumanVSHuman extends OthelloControllerVerbose impl
 	private PlayerHuman player1;
 	private PlayerHuman player2;
 	public OthelloControllerHumanVSHuman(Othello othello) {
-//		super();
 		this.player1 = new PlayerHuman(othello, OthelloBoard.P1);
 		this.player2 = new PlayerHuman(othello, OthelloBoard.P2);
 	}
@@ -77,6 +75,7 @@ public class OthelloControllerHumanVSHuman extends OthelloControllerVerbose impl
 							updatedToken.setFill(updatedColor);
 					        gridBoard.add(updatedToken, c, r);
 					        othello.addTokenToTokenList(updatedToken);
+					        
 					     // Center the piece in the cell
 					        GridPane.setHalignment(updatedToken, HPos.CENTER);
 					        GridPane.setValignment(updatedToken, VPos.CENTER);
