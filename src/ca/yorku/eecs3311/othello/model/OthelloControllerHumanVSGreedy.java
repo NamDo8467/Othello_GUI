@@ -18,7 +18,6 @@ public class OthelloControllerHumanVSGreedy extends OthelloControllerVerbose imp
 	public OthelloControllerHumanVSGreedy(Othello othello) {
 		this.player1 = new PlayerHuman(othello, OthelloBoard.P1);
 		this.player2 = new PlayerGreedy(othello, OthelloBoard.P2);
-		
 	}
 	
 	@Override
