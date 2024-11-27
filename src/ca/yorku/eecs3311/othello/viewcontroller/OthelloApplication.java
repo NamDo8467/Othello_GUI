@@ -55,6 +55,7 @@ public class OthelloApplication extends Application {
 		// VIEW->CONTROLLER hookup
 		vPlayerVSPlayerButton.setOnAction(cpresshandler);
 		vPlayerVSAIButton.setOnAction(cpresshandler);
+		vPlayerVSRandomButton.setOnAction(cpresshandler);
 		// MODEL->VIEW hookup
 		
 		

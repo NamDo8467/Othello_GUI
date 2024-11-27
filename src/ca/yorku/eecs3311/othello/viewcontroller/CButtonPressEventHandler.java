@@ -35,7 +35,7 @@ public class CButtonPressEventHandler implements EventHandler<ActionEvent> {
 			
 		}else if(source.getText() == "Player vs Random") {
 			
-			othelloController.setControllerType(new OthelloControllerHumanVSRandom());
+			othelloController.setControllerType(new OthelloControllerHumanVSRandom(this.othelloController.othello));
 			
 		}
 		this.othelloController.play();
