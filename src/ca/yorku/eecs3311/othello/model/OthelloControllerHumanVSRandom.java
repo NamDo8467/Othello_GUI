@@ -19,10 +19,9 @@ public class OthelloControllerHumanVSRandom extends OthelloControllerVerbose imp
 	 * Constructs a new OthelloController with a new Othello game.
 	 * Human VS Random strategy
 	 */
-	public OthelloControllerHumanVSRandom() {
-		super();
-		this.player1 = new PlayerHuman(this.othello, OthelloBoard.P1);
-		this.player2 = new PlayerRandom(this.othello, OthelloBoard.P2);
+	public OthelloControllerHumanVSRandom(Othello othello) {
+		this.player1 = new PlayerHuman(othello, OthelloBoard.P1);
+		this.player2 = new PlayerRandom(othello, OthelloBoard.P2);
 	}
 	
 	public void handleMove(int row, int col, GridPane gridBoard, Othello othello) {
@@ -43,13 +42,17 @@ public class OthelloControllerHumanVSRandom extends OthelloControllerVerbose imp
 					color = Color.WHITE;
 				}
 
-				Circle piece = new Circle(70 / 2 - 5);
-		        piece.setFill(color);
-		        gridBoard.add(piece, col, row);
+				Circle token = new Circle(70 / 2 - 5);
+		        token.setFill(color);
+		        gridBoard.add(token, col, row);
+		        othello.addTokenToTokenList(token);
 		        
 		        // Center the piece in the cell
-		        GridPane.setHalignment(piece, HPos.CENTER);
-		        GridPane.setValignment(piece, VPos.CENTER);
+		        GridPane.setHalignment(token, HPos.CENTER);
+		        GridPane.setValignment(token, VPos.CENTER);
+		        
+		        Move randomMove = this.player2.getMove();
+		        othello.move(randomMove.getRow(), randomMove.getCol());
 		        
 		        // Update the GUI based on the board string array
 		        for (int r = 0; r < boardArray.length; r++) {
@@ -57,22 +60,25 @@ public class OthelloControllerHumanVSRandom extends OthelloControllerVerbose imp
 						Color updatedColor = Color.RED;
 						if (boardArray[r][c] == OthelloBoard.P1) {
 							updatedColor = Color.BLACK;
-							Circle updatedPiece = new Circle(70 / 2 - 5);
-					        updatedPiece.setFill(updatedColor);
-					        gridBoard.add(updatedPiece, c, r);
+							Circle updatedToken = new Circle(70 / 2 - 5);
+					        updatedToken.setFill(updatedColor);
+					        gridBoard.add(updatedToken, c, r);
+					        othello.addTokenToTokenList(updatedToken);
 
 					     // Center the piece in the cell
-					        GridPane.setHalignment(updatedPiece, HPos.CENTER);
-					        GridPane.setValignment(updatedPiece, VPos.CENTER);
+					        GridPane.setHalignment(updatedToken, HPos.CENTER);
+					        GridPane.setValignment(updatedToken, VPos.CENTER);
 							
 						}else if(boardArray[r][c] == OthelloBoard.P2){
 							updatedColor = Color.WHITE;
-							Circle updatedPiece = new Circle(70 / 2 - 5);
-					        updatedPiece.setFill(updatedColor);
-					        gridBoard.add(updatedPiece, c, r);
+							Circle updatedToken = new Circle(70 / 2 - 5);
+							updatedToken.setFill(updatedColor);
+					        gridBoard.add(updatedToken, c, r);
+					        othello.addTokenToTokenList(updatedToken);
+					        
 					     // Center the piece in the cell
-					        GridPane.setHalignment(updatedPiece, HPos.CENTER);
-					        GridPane.setValignment(updatedPiece, VPos.CENTER);
+					        GridPane.setHalignment(updatedToken, HPos.CENTER);
+					        GridPane.setValignment(updatedToken, VPos.CENTER);
 						}
 
 					}
