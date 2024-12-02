@@ -28,21 +28,18 @@ public class OthelloControllerHumanVSHuman extends OthelloControllerVerbose impl
 		if (othello.isGameOver() == false) {
 			char whosTurn = othello.getWhosTurn();
 			
-			OthelloBoard boardArrayCopy = othello.getBoard();
-			char [][] b = boardArrayCopy.board;
 			Move move = null;
 			move = new Move(row, col);
 			
 			Othello othelloCopy = othello.copy();
 			
+			// Capture the current state of the game
 			GameState gameState = new GameState(othelloCopy.getBoard(), othello.getWhosTurn(), othello.getBoard().copyTokens());
-//			System.out.println("-----------------------");
+			
+			
 			boolean canMove = othello.move(move.getRow(), move.getCol());
-			
-			
 			if (canMove) {
 				Color color = Color.RED;
-				char [][] boardArray = othello.getBoardArray();
 				if (whosTurn == OthelloBoard.P1) {
 					color = Color.BLACK;
 				}
@@ -64,37 +61,6 @@ public class OthelloControllerHumanVSHuman extends OthelloControllerVerbose impl
 		        othello.historyStack.push(gameState);
 		        othello.notifyObservers();
 		        
-		        // Update the GUI based on the board string array		    
-//		        for (int r = 0; r < boardArray.length; r++) {
-//					for(int c = 0; c < boardArray[0].length; c++) {
-//						Color updatedColor = Color.RED;
-//						if (boardArray[r][c] == OthelloBoard.P1) {
-//							updatedColor = Color.BLACK;
-//							Circle updatedToken = new Circle(70 / 2 - 5);
-//							
-//							updatedToken.setFill(updatedColor);
-//					        gridBoard.add(updatedToken, c, r);
-//					        othello.addTokenToTokenList(updatedToken);
-//					        
-//					     // Center the piece in the cell
-//					        GridPane.setHalignment(updatedToken, HPos.CENTER);
-//					        GridPane.setValignment(updatedToken, VPos.CENTER);
-//					        
-//							
-//						}else if(boardArray[r][c] == OthelloBoard.P2){
-//							updatedColor = Color.WHITE;
-//							Circle updatedToken = new Circle(70 / 2 - 5);
-//							updatedToken.setFill(updatedColor);
-//					        gridBoard.add(updatedToken, c, r);
-//					        othello.addTokenToTokenList(updatedToken);
-//					        
-//					     // Center the piece in the cell
-//					        GridPane.setHalignment(updatedToken, HPos.CENTER);
-//					        GridPane.setValignment(updatedToken, VPos.CENTER);
-//						}
-//
-//					}
-//				}
 			}
 			
 		}

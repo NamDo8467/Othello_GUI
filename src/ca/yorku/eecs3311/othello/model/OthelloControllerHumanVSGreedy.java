@@ -32,12 +32,12 @@ public class OthelloControllerHumanVSGreedy extends OthelloControllerVerbose imp
 			
 			
 			Othello othelloCopy = othello.copy();
+			
+			// Capture the current game state
 			GameState gameState = new GameState(othelloCopy.getBoard(), othello.getWhosTurn(), othello.getBoard().copyTokens());
 			
 			boolean canMove = othello.move(move.getRow(), move.getCol());
-			if (canMove) {
-				char [][] boardArray = othello.getBoardArray();
-				
+			if (canMove) {				
 				Color color = Color.RED;
 				if (whosTurn == OthelloBoard.P1) {
 					color = Color.BLACK;
@@ -59,44 +59,10 @@ public class OthelloControllerHumanVSGreedy extends OthelloControllerVerbose imp
 		        // Player2 makes a move
 		        Move greedyMove = this.player2.getMove();
 		        othello.move(greedyMove.getRow(), greedyMove.getCol());
-//		        System.out.println(greedyMove.getRow());
-//		        System.out.println(greedyMove.getCol());
-//		        othello.notifyObservers();
-//		        System.out.println(othello.getBoardString());
 		        
-		        // Update the history stack
+		        // Update the history stack and re-draw the board
 		        othello.historyStack.push(gameState);
 		        othello.notifyObservers();
-		        
-		        
-		        // Update the GUI based on the board string array
-//		        for (int r = 0; r < boardArray.length; r++) {
-//					for(int c = 0; c < boardArray[0].length; c++) {
-//						Color updatedColor = Color.RED;
-//						if (boardArray[r][c] == OthelloBoard.P1) {
-//							updatedColor = Color.BLACK;
-//							Circle updatedToken = new Circle(70 / 2 - 5);
-//					        updatedToken.setFill(updatedColor);
-//					        gridBoard.add(updatedToken, c, r);
-//					        othello.addTokenToTokenList(updatedToken);
-//
-//					     // Center the piece in the cell
-//					        GridPane.setHalignment(updatedToken, HPos.CENTER);
-//					        GridPane.setValignment(updatedToken, VPos.CENTER);
-//							
-//						}else if(boardArray[r][c] == OthelloBoard.P2){
-//							updatedColor = Color.WHITE;
-//							Circle updatedToken = new Circle(70 / 2 - 5);
-//					        updatedToken.setFill(updatedColor);
-//					        gridBoard.add(updatedToken, c, r);
-//					        othello.addTokenToTokenList(updatedToken);
-//					     // Center the piece in the cell
-//					        GridPane.setHalignment(updatedToken, HPos.CENTER);
-//					        GridPane.setValignment(updatedToken, VPos.CENTER);
-//						}
-//
-//					}
-//				}
 			}
 			
 		}

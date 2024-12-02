@@ -90,7 +90,6 @@ public class OthelloBoard {
 	public void addTheFirst4Token(int row, int col) {
 		
 		if ((row == 3 && col == 3) || (row == 4 && col == 4)) {
-//			System.out.println("Row: " + row + " Col: " + col);
         	Circle token = new Circle(CELL_SIZE / 2 - 5);
             
             token.setFill(Color.BLACK);
@@ -102,7 +101,6 @@ public class OthelloBoard {
 		}
 
         if((row == 4 && col == 3) || (row == 3 && col == 4)) {
-//        	System.out.println("Row: " + row + " Col: " + col);
         	Circle token = new Circle(CELL_SIZE / 2 - 5);
             
             token.setFill(Color.WHITE);
@@ -332,15 +330,9 @@ public class OthelloBoard {
 	 * 
 	 * */
 	public void resetBoard() {
-
-//		System.out.println("Tokens: " + this.tokens.size());
-//		System.out.println("Before delete: ");
-//		System.out.println(this.gridBoard.getChildren());
-//		System.out.println("line 340 - OthelloBoard: Token size: " + tokens.size());
 		this.gridBoard.getChildren().removeAll(tokens);
 		
 		while (tokens.size() > 0) {
-//			System.out.println("Row: " + GridPane.getRowIndex(tokens.get(0)) + " Col: " +  GridPane.getColumnIndex(tokens.get(0)));
 			tokens.remove(0);
 		}
 		
@@ -353,14 +345,6 @@ public class OthelloBoard {
 		int mid = this.dim / 2;
 		this.board[mid - 1][mid - 1] = this.board[mid][mid] = P1;
 		this.board[mid][mid - 1] = this.board[mid - 1][mid] = P2;
-		
-		
-//		System.out.println("After delete: ");
-//		System.out.println(this.gridBoard.getChildren());
-//		tokens.remove
-//		for(Node n:this.gridBoard.getChildren()) {
-//			System.out.println(n);
-//		}
 	}
 
 	/**
