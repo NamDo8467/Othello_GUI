@@ -1,6 +1,7 @@
 package ca.yorku.eecs3311.othello.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -37,8 +38,8 @@ public class OthelloBoard {
 	public static final char EMPTY = ' ', P1 = 'X', P2 = 'O', BOTH = 'B';
 	private int dim = 8;
 	protected char[][] board;
-	public ArrayList<Rectangle> cells;
-	public ArrayList<Circle> tokens;
+	public ArrayList<Rectangle> cells = new ArrayList<Rectangle>();
+	public ArrayList<Circle> tokens ;
 	public GridPane gridBoard;
 	public Stage stage;
 	public static final int CELL_HEIGHT = 70;
@@ -57,11 +58,10 @@ public class OthelloBoard {
 			}
 		}
 
-		cells = new ArrayList<Rectangle>();
-		tokens = new ArrayList<Circle>();
 		int mid = this.dim / 2;
 		this.board[mid - 1][mid - 1] = this.board[mid][mid] = P1;
 		this.board[mid][mid - 1] = this.board[mid - 1][mid] = P2;
+		this.tokens = new ArrayList<Circle>();
 		for (int row = 0; row < dim; row++) {
             for (int col = 0; col < dim; col++) {
                 Rectangle tile = new Rectangle(CELL_WIDTH, CELL_HEIGHT);
@@ -69,19 +69,18 @@ public class OthelloBoard {
                 // Set color for a checkerboard pattern
                 tile.setFill((row + col) % 2 == 0 ? Color.GREEN : Color.DARKGREEN);
                 
-                gridBoard.add(tile, col, row);
+               gridBoard.add(tile, col, row);
                 
                 
                 addTheFirst4Token(row, col);
                 
-                
-                
+              
                 cells.add(tile);
-            }
+           }
 
 	
 
-		     }
+		}
 		 
 		gridBoard.setAlignment(Pos.CENTER);
 		
@@ -127,9 +126,19 @@ public class OthelloBoard {
 				ob.board[row][col] = this.board[row][col];
 			}
 		}
+		ob.gridBoard = this.gridBoard;
 		return ob;
 	}
 
+	
+	public ArrayList<Circle> copyTokens(){
+		ArrayList<Circle> tokensCopy = new ArrayList<>();
+		for (Circle c:tokens) {
+			tokensCopy.add(c);
+			
+		}
+		return tokensCopy;
+	}
 	/**
 	 * 
 	 * @param row starting row, in {0,...,dim-1} (typically {0,...,7})
@@ -327,8 +336,11 @@ public class OthelloBoard {
 //		System.out.println("Tokens: " + this.tokens.size());
 //		System.out.println("Before delete: ");
 //		System.out.println(this.gridBoard.getChildren());
+//		System.out.println("line 340 - OthelloBoard: Token size: " + tokens.size());
 		this.gridBoard.getChildren().removeAll(tokens);
+		
 		while (tokens.size() > 0) {
+//			System.out.println("Row: " + GridPane.getRowIndex(tokens.get(0)) + " Col: " +  GridPane.getColumnIndex(tokens.get(0)));
 			tokens.remove(0);
 		}
 		
