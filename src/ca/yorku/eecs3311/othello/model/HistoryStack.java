@@ -3,15 +3,29 @@ import java.util.ArrayList;
 
 public class HistoryStack {
 	
-	private ArrayList<char[][]> stack;
+	private ArrayList<GameState> stack;
 	public HistoryStack() {
-		this.stack = new ArrayList<char[][]>();
+		this.stack = new ArrayList<GameState>();
 	}
 	
-	public void add(char[][] board) {
-		this.stack.add(board);
+	public boolean isEmpty() { 
+		return this.stack.size() == 0; 
 	}
 	
+	
+	public void push(GameState state) {
+		this.stack.add(state);
+	}
+	
+	public GameState pop() {
+		if(this.isEmpty()) { 
+			return null; 
+		}
+		return this.stack.remove(this.stack.size() - 1);
+	}
+	public int getSize() {
+		return this.stack.size();
+	}
 
 	public static void main(String[] args) {
 		System.out.println("This is the History Stack");
