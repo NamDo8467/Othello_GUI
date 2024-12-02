@@ -1,20 +1,12 @@
 package ca.yorku.eecs3311.othello.model;
 
-import java.util.ArrayList;
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public abstract class OthelloController {
 
 	protected Othello othello;
 	public ControllerTypeInterface controllerType;
-	protected HistoryStack historyStack;
+//	protected HistoryStack historyStack;
 	Player player1, player2;
 	
 	/**
@@ -24,7 +16,7 @@ public abstract class OthelloController {
 	public Stage stage;
 	public OthelloController() {
 		this.othello = new Othello();
-		this.historyStack = new HistoryStack();
+//		this.historyStack = new HistoryStack();
 //		this.stage = stage;
 	}
 
