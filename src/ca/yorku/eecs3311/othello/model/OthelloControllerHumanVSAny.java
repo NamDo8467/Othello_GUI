@@ -20,10 +20,9 @@ public class OthelloControllerHumanVSAny {
 	public OthelloControllerHumanVSAny() {
 	}
 	
-	public OthelloControllerHumanVSAny(Stage stage, Othello othello) {
+	public OthelloControllerHumanVSAny(Othello othello) {
 		super();
 		this.othello = othello;
-		this.stage = stage;
 
 	}
 	
@@ -32,7 +31,7 @@ public class OthelloControllerHumanVSAny {
 	}
 	
 	public void play() {
-		this.othello.setGameGrid(this.stage);		
+//		this.othello.setGameGrid();		
 		ArrayList<Rectangle> cells = this.othello.getCells();
 		GridPane gridBoard = this.othello.getBoard().gridBoard;
 		for(Rectangle cell:cells) {
