@@ -22,6 +22,9 @@ public class OthelloControllerHumanVSRandom extends OthelloControllerVerbose imp
 	public OthelloControllerHumanVSRandom(Othello othello) {
 		this.player1 = new PlayerHuman(othello, OthelloBoard.P1);
 		this.player2 = new PlayerRandom(othello, OthelloBoard.P2);
+		
+		ScenePlayerVSAny scenePlayerVSRandom = new ScenePlayerVSRandom(othello);
+		othello.stage.setScene(scenePlayerVSRandom.getScene());
 	}
 	
 	public void handleMove(int row, int col, GridPane gridBoard, Othello othello) {
@@ -29,6 +32,10 @@ public class OthelloControllerHumanVSRandom extends OthelloControllerVerbose imp
 			char whosTurn = othello.getWhosTurn();
 			Move move = null;
 			move = new Move(row, col);
+			
+			Othello othelloCopy = othello.copy();
+			
+			GameState gameState = new GameState(othelloCopy.getBoard(), othello.getWhosTurn(), othello.getBoard().copyTokens());
 			
 			boolean canMove = othello.move(move.getRow(), move.getCol());
 			if (canMove) {
@@ -54,39 +61,41 @@ public class OthelloControllerHumanVSRandom extends OthelloControllerVerbose imp
 		        Move randomMove = this.player2.getMove();
 		        othello.move(randomMove.getRow(), randomMove.getCol());
 		        
+		        // Update the history stack and re-draw the board	        
+		        othello.historyStack.push(gameState);
+		        othello.notifyObservers();
+		        
 		        // Update the GUI based on the board string array
-		        for (int r = 0; r < boardArray.length; r++) {
-					for(int c = 0; c < boardArray[0].length; c++) {
-						Color updatedColor = Color.RED;
-						if (boardArray[r][c] == OthelloBoard.P1) {
-							updatedColor = Color.BLACK;
-							Circle updatedToken = new Circle(70 / 2 - 5);
-					        updatedToken.setFill(updatedColor);
-					        gridBoard.add(updatedToken, c, r);
-					        othello.addTokenToTokenList(updatedToken);
-
-					     // Center the piece in the cell
-					        GridPane.setHalignment(updatedToken, HPos.CENTER);
-					        GridPane.setValignment(updatedToken, VPos.CENTER);
-							
-						}else if(boardArray[r][c] == OthelloBoard.P2){
-							updatedColor = Color.WHITE;
-							Circle updatedToken = new Circle(70 / 2 - 5);
-							updatedToken.setFill(updatedColor);
-					        gridBoard.add(updatedToken, c, r);
-					        othello.addTokenToTokenList(updatedToken);
-					        
-					     // Center the piece in the cell
-					        GridPane.setHalignment(updatedToken, HPos.CENTER);
-					        GridPane.setValignment(updatedToken, VPos.CENTER);
-						}
-
-					}
-				}
+//		        for (int r = 0; r < boardArray.length; r++) {
+//					for(int c = 0; c < boardArray[0].length; c++) {
+//						Color updatedColor = Color.RED;
+//						if (boardArray[r][c] == OthelloBoard.P1) {
+//							updatedColor = Color.BLACK;
+//							Circle updatedToken = new Circle(70 / 2 - 5);
+//					        updatedToken.setFill(updatedColor);
+//					        gridBoard.add(updatedToken, c, r);
+//					        othello.addTokenToTokenList(updatedToken);
+//
+//					     // Center the piece in the cell
+//					        GridPane.setHalignment(updatedToken, HPos.CENTER);
+//					        GridPane.setValignment(updatedToken, VPos.CENTER);
+//							
+//						}else if(boardArray[r][c] == OthelloBoard.P2){
+//							updatedColor = Color.WHITE;
+//							Circle updatedToken = new Circle(70 / 2 - 5);
+//							updatedToken.setFill(updatedColor);
+//					        gridBoard.add(updatedToken, c, r);
+//					        othello.addTokenToTokenList(updatedToken);
+//					        
+//					     // Center the piece in the cell
+//					        GridPane.setHalignment(updatedToken, HPos.CENTER);
+//					        GridPane.setValignment(updatedToken, VPos.CENTER);
+//						}
+//
+//					}
+//				}
 			}
 			
-		}else {
-			othello.notifyObservers();
 		}
 	}
 	/**
