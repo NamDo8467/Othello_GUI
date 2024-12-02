@@ -32,8 +32,8 @@ public class OthelloApplication extends Application {
 		// Create and hook up the Model, View and the controller
 		
 		// MODEL
-		Othello othello = new Othello();		
-		OthelloControllerHumanVSAny othelloController = new OthelloControllerHumanVSAny(stage, othello);
+		Othello othello = new Othello(stage);		
+		OthelloControllerHumanVSAny othelloController = new OthelloControllerHumanVSAny(othello);
 //		OthelloControllerHumanVSAny othelloController = new OthelloControllerHumanVSAny();
 		
 		// CONTROLLER
@@ -85,7 +85,8 @@ public class OthelloApplication extends Application {
 		}		
 		grid.setAlignment(Pos.CENTER);
 		
-  
+		
+		
 		
 		// SCENE
 		Scene scene = new Scene(grid, SCENE_WIDTH, SCENE_HEIGHT);
