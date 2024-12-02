@@ -1,18 +1,10 @@
 package ca.yorku.eecs3311.othello.model;
-import ca.yorku.eecs3311.othello.viewcontroller.VScoreAndTurn;
-import ca.yorku.eecs3311.othello.viewcontroller.OthelloApplication;
 import ca.yorku.eecs3311.util.Observable;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -36,47 +28,103 @@ public class Othello extends Observable {
 	private OthelloBoard board=new OthelloBoard(Othello.DIMENSION);
 	private char whosTurn = OthelloBoard.P1;
 	private int numMoves = 0;
-
+	public HistoryStack historyStack;
+	public Stage stage;
 	
-	public void setGameGrid(Stage stage) {
 	
-		BorderPane bp = new BorderPane();
-		VScoreAndTurn score = new VScoreAndTurn();
-		
-		VBox buttonBox = new VBox(10);
-		buttonBox.setPadding(new Insets(0, 5, 0, 5));
-		Button restartButton = new Button("Restart");
-		
-		Button undoButton = new Button("Undo");
-
-		restartButton.setFocusTraversable(false);
-		restartButton.setPrefWidth(55);
-		restartButton.setPrefHeight(30);
-		
-		restartButton.setOnMouseClicked((MouseEvent event) ->{
-			this.resetBoard();
-		});
-		
-		undoButton.setFocusTraversable(false);
-		undoButton.setPrefWidth(55);
-		undoButton.setPrefHeight(30);
-		bp.setRight(buttonBox);
-		bp.setBottom(score);
-		
-		buttonBox.getChildren().addAll(restartButton, undoButton);
-		buttonBox.setAlignment(Pos.CENTER);
-		
-		bp.setCenter(this.board.gridBoard);
-		this.attach(score);
-//		this.attach(board);
-		Scene scene = new Scene(bp, OthelloApplication.SCENE_WIDTH, OthelloApplication.SCENE_HEIGHT);
-
-		
-
-		stage.setScene(scene);
-
+	public BoardUpdater boardUpdater = new BoardUpdater();
+	
+	public Othello() {
+		this.attach(boardUpdater);
 	}
 	
+	public Othello(Stage stage) {
+		this.stage = stage;
+		this.historyStack = new HistoryStack();
+		this.attach(boardUpdater);
+		
+		
+	}
+	
+	public void setState(GameState state) {
+		this.board = state.getBoard();
+		this.whosTurn = state.getWhosTurn();
+		this.board.tokens = state.getTokens();
+//		System.out.println("Size:" + this.board.tokens.size());
+//		System.out.println("Line 52 Othello.java - Size:" + this.board.tokens.size());
+		this.notifyObservers();
+		
+	}
+	
+	public void undo() {
+		GameState previousState = this.historyStack.pop();
+		if (previousState == null) {
+			return;
+		}
+//		System.out.println("Size before: " + this.board.gridBoard.getChildren().size());
+
+		this.board.gridBoard.getChildren().removeAll(this.board.tokens);
+		while (this.board.tokens.size() > 0) {
+			this.board.tokens.remove(0);
+		}
+		
+		this.setState(previousState);
+		
+	}
+	
+//	public void undoPlayerVSAI() {
+//		GameState previousState = this.historyStack.pop();
+//		if (previousState == null) {
+//			return;
+//		}
+////		System.out.println("Size before: " + this.board.gridBoard.getChildren().size());
+//
+//		this.board.gridBoard.getChildren().removeAll(this.board.tokens);
+//		while (this.board.tokens.size() > 0) {
+//			this.board.tokens.remove(0);
+//		}
+//		
+//		this.setState(previousState);
+//	}
+	
+//	public void setGameGrid() {
+//	
+//		BorderPane bp = new BorderPane();
+//		VScoreAndTurn score = new VScoreAndTurn();
+//		
+//		VBox buttonBox = new VBox(10);
+//		buttonBox.setPadding(new Insets(0, 5, 0, 5));
+//		Button restartButton = new Button("Restart");
+//		
+//		Button undoButton = new Button("Undo");
+//
+//		restartButton.setFocusTraversable(false);
+//		restartButton.setPrefWidth(55);
+//		restartButton.setPrefHeight(30);
+//		
+//		restartButton.setOnMouseClicked((MouseEvent event) ->{
+//			this.resetBoard();
+//		});
+//		
+//		undoButton.setFocusTraversable(false);
+//		undoButton.setPrefWidth(55);
+//		undoButton.setPrefHeight(30);
+//		
+//		bp.setRight(buttonBox);
+//		bp.setBottom(score);
+//		
+//		buttonBox.getChildren().addAll(restartButton, undoButton);
+//		buttonBox.setAlignment(Pos.CENTER);
+//		
+//		bp.setCenter(this.board.gridBoard);
+//		this.attach(score);
+//
+//		Scene scene = new Scene(bp, OthelloApplication.SCENE_WIDTH, OthelloApplication.SCENE_HEIGHT);
+//
+//		stage.setScene(scene);
+//
+//	}
+//	
 	
 	protected ArrayList<Rectangle> getCells() {
 		return this.board.cells;
@@ -128,10 +176,9 @@ public class Othello extends Observable {
 //			System.out.println("Change to: " + this.whosTurn);
 			if(allowedMove!=OthelloBoard.BOTH)this.whosTurn=allowedMove;
 			this.numMoves++;
-			this.notifyObservers();
+//			this.notifyObservers();
 //			System.out.println(this.getBoard().gridBoard.getChildren().size());
 				
-			
 			return true;
 		} else {
 			return false;
@@ -176,14 +223,15 @@ public class Othello extends Observable {
 	 */
 	public Othello copy() {
 		Othello o= new Othello();
-		o.board=this.board.copy();
+		o.board = this.board.copy();
 		o.numMoves = this.numMoves;
 		o.whosTurn = this.whosTurn;
+//		o.historyStack = this.historyStack;
 		return o;
 	}
 	
 	/**
-	 * Reset the board
+	 * Reset the board and scores
 	 */
 	public void resetBoard() {
 		this.board.resetBoard();
