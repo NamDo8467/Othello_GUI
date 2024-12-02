@@ -60,12 +60,7 @@ public class OthelloControllerHumanVSHuman extends OthelloControllerVerbose impl
 		        GridPane.setValignment(token, VPos.CENTER);
 
 		        
-		        // Update the history stack
-//		        System.out.println(othello.getCount(OthelloBoard.P1));
-//				System.out.println(whosTurn);
-		        
-		        
-//				System.out.println(gameState.getTokens().size());
+		        // Update the history stack and re-draw the board	        
 		        othello.historyStack.push(gameState);
 		        othello.notifyObservers();
 		        
