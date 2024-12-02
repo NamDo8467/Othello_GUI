@@ -6,7 +6,6 @@ public abstract class OthelloController {
 
 	protected Othello othello;
 	public ControllerTypeInterface controllerType;
-//	protected HistoryStack historyStack;
 	Player player1, player2;
 	
 	/**
@@ -16,8 +15,6 @@ public abstract class OthelloController {
 	public Stage stage;
 	public OthelloController() {
 		this.othello = new Othello();
-//		this.historyStack = new HistoryStack();
-//		this.stage = stage;
 	}
 
 	public void play() {
