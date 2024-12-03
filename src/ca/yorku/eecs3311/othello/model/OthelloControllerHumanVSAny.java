@@ -30,8 +30,7 @@ public class OthelloControllerHumanVSAny {
 		this.controllerType = controllerType;
 	}
 	
-	public void play() {
-//		this.othello.setGameGrid();		
+	public void play() {	
 		ArrayList<Rectangle> cells = this.othello.getCells();
 		GridPane gridBoard = this.othello.getBoard().gridBoard;
 		for(Rectangle cell:cells) {

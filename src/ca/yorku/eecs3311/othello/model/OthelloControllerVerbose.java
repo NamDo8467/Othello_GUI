@@ -1,7 +1,5 @@
 package ca.yorku.eecs3311.othello.model;
 
-import javafx.stage.Stage;
-
 public abstract class OthelloControllerVerbose extends OthelloController {
 	
 	public OthelloControllerVerbose () {
