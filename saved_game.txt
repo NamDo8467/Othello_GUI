@@ -1,0 +1,10 @@
+mode:Player vs Player
+whosTurn:X
+        
+        
+    X   
+   XX   
+   OOO  
+        
+        
+        
