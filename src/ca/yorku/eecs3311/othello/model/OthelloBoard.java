@@ -346,6 +346,18 @@ public class OthelloBoard {
 		this.board[mid - 1][mid - 1] = this.board[mid][mid] = P1;
 		this.board[mid][mid - 1] = this.board[mid - 1][mid] = P2;
 	}
+	
+	
+	/***
+	 * Update the board from the saved_game.txt file
+	 * */
+	public void updateBoardFromLoadedGame(char[][] loadedBoard) {
+		for (int row = 0; row < this.dim; row++) {
+			for (int col = 0; col < this.dim; col++) {
+				this.board[row][col] = loadedBoard[row][col];
+			}
+		}
+	}
 
 	/**
 	 * 

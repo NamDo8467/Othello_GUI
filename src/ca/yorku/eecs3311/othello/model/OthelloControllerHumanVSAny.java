@@ -12,7 +12,6 @@ public class OthelloControllerHumanVSAny {
 	public ControllerTypeInterface controllerType;
 	public Stage stage;
 	public OthelloControllerHumanVSAny(Stage stage, ControllerTypeInterface controllerType)  {
-		super();
 		this.controllerType = controllerType;
 
 	}
@@ -21,7 +20,6 @@ public class OthelloControllerHumanVSAny {
 	}
 	
 	public OthelloControllerHumanVSAny(Othello othello) {
-		super();
 		this.othello = othello;
 
 	}
