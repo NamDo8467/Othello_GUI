@@ -25,7 +25,7 @@ public class OthelloApplication extends Application {
 	final int GAME_NAME_LABEL_HEIGHT = 40;
 	final int GAME_NAME_LABEL_WIDTH = 120;
 	public static final int SCENE_HEIGHT = 600;
-	public static final int SCENE_WIDTH = 640;
+	public static final int SCENE_WIDTH = 650;
 	
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -34,11 +34,11 @@ public class OthelloApplication extends Application {
 		// MODEL
 		Othello othello = new Othello(stage);		
 		OthelloControllerHumanVSAny othelloController = new OthelloControllerHumanVSAny(othello);
-//		OthelloControllerHumanVSAny othelloController = new OthelloControllerHumanVSAny();
 		
 		// CONTROLLER
 		// CONTROLLER->MODEL hookup
 		CButtonPressEventHandler cpresshandler= new CButtonPressEventHandler(othelloController);
+		CLoadGamePressEventHandler cloadGamehandler = new CLoadGamePressEventHandler(othelloController);
 	
 		// VIEW
 		Label gameNameLabel = new Label("Othello");
@@ -50,12 +50,15 @@ public class OthelloApplication extends Application {
 		Button vPlayerVSPlayerButton = new Button("Player vs Player");
 		Button vPlayerVSAIButton = new Button("Player vs AI");
 		Button vPlayerVSRandomButton = new Button("Player vs Random");
-		Button [] buttonArray = {vPlayerVSAIButton, vPlayerVSPlayerButton, vPlayerVSRandomButton};
+		Button vLoadGameButton = new Button("Load game");
+		vLoadGameButton.setFont(new Font(11));
+		Button [] buttonArray = {vPlayerVSAIButton, vPlayerVSPlayerButton, vPlayerVSRandomButton, vLoadGameButton};
 		
 		// VIEW->CONTROLLER hookup
 		vPlayerVSPlayerButton.setOnAction(cpresshandler);
 		vPlayerVSAIButton.setOnAction(cpresshandler);
 		vPlayerVSRandomButton.setOnAction(cpresshandler);
+		vLoadGameButton.setOnAction(cloadGamehandler);
 		// MODEL->VIEW hookup
 		
 		
@@ -65,13 +68,15 @@ public class OthelloApplication extends Application {
 		grid.add(vPlayerVSPlayerButton, 0, 1);
 		grid.add(vPlayerVSAIButton, 0, 2);
 		grid.add(vPlayerVSRandomButton, 0, 3);
+		grid.add(vLoadGameButton,0,4);
 		
 		RowConstraints row0 = new RowConstraints();
 		RowConstraints row1 = new RowConstraints();
 		RowConstraints row2 = new RowConstraints();
 		RowConstraints row3 = new RowConstraints();
+		RowConstraints row4 = new RowConstraints();
 		
-		RowConstraints [] rowConstraintArray = {row0, row1, row2, row3};
+		RowConstraints [] rowConstraintArray = {row0, row1, row2, row3, row4};
 		for(RowConstraints row: rowConstraintArray) {
 			grid.getRowConstraints().add(row);
 			row.setPrefHeight(PREF_HEIGHT);
