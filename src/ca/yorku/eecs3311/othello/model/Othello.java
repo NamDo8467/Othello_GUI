@@ -28,6 +28,7 @@ public class Othello extends Observable {
 	private int numMoves = 0;
 	public HistoryStack historyStack;
 	public Stage stage;
+	public String mode;
 	
 	
 	public BoardUpdater boardUpdater = new BoardUpdater();
@@ -89,6 +90,10 @@ public class Othello extends Observable {
 	 */
 	public char getWhosTurn() {
 		return this.whosTurn;
+	}
+	
+	public void setWhosTurn(char whosTurn) {
+		this.whosTurn = whosTurn;
 	}
 	
 	/**
@@ -163,6 +168,7 @@ public class Othello extends Observable {
 		o.board = this.board.copy();
 		o.numMoves = this.numMoves;
 		o.whosTurn = this.whosTurn;
+		o.mode = this.mode;
 		return o;
 	}
 	
@@ -173,6 +179,19 @@ public class Othello extends Observable {
 		this.board.resetBoard();
 		this.whosTurn = OthelloBoard.P1;
 		this.notifyObservers();
+	}
+	
+	public void updateBoardFromLoadedGame(char[][] loadedBoard) {
+		
+		
+		this.board.gridBoard.getChildren().removeAll(this.board.tokens); // remove all the tokens (the circles) from the GUI board
+		
+		// remove all the tokens from the tokens list
+		while (this.board.tokens.size() > 0) {
+			this.board.tokens.remove(0);
+		}
+		
+		this.board.updateBoardFromLoadedGame(loadedBoard);
 	}
 	
 	/**
