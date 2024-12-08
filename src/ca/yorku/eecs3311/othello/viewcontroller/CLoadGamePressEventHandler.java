@@ -11,6 +11,11 @@ import ca.yorku.eecs3311.othello.model.OthelloControllerHumanVSRandom;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+/**
+ * This class is an EventHandler for "Load Game" button
+ * @author Do Huynh
+ *
+ */
 public class CLoadGamePressEventHandler implements EventHandler<ActionEvent> {
 
 	private OthelloControllerHumanVSAny othelloController;

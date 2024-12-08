@@ -7,6 +7,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
+/**
+ * This class is an EventHandler for picking a game mode.
+ * @author Do Huynh
+ *
+ */
 public class CButtonPressEventHandler implements EventHandler<ActionEvent> {
 	
 	private OthelloControllerHumanVSAny othelloController;
