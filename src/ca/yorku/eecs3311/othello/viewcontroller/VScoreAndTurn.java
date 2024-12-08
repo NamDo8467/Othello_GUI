@@ -1,14 +1,20 @@
 package ca.yorku.eecs3311.othello.viewcontroller;
-
 import ca.yorku.eecs3311.util.Observable;
 import ca.yorku.eecs3311.util.Observer;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 import ca.yorku.eecs3311.othello.model.Othello;
 import ca.yorku.eecs3311.othello.model.OthelloBoard;
 
+/**
+ * This class acts like a "Score and Turn" board where it displays the number of tokens each player has
+ * as well as whose turn it is right now.
+ * 
+ * This class is also an Observer. It will update the "Score and Turn" board after each move is made.
+ * @author Do Huynh
+ *
+ */
 public class VScoreAndTurn extends Label implements Observer {
 	private String turn;
 	private String winner;
@@ -23,9 +29,6 @@ public class VScoreAndTurn extends Label implements Observer {
 	@Override
 	public void update(Observable o) {
 		Othello othello = (Othello) o;
-//		System.out.println(othello);
-//		String turn = "";
-//		String winner = "";
 		if (othello.isGameOver() == true) {
 			winner = (othello.getWinner() == 'X') ? "Black" : "White";
 			this.setText("Black: " + othello.getCount(OthelloBoard.P1) + " | White: " + othello.getCount(OthelloBoard.P2) + " | " + winner + " won !!!");
