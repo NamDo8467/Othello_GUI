@@ -1,8 +1,6 @@
 package ca.yorku.eecs3311.othello.model;
 
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
-
 import java.util.ArrayList;
 
 public class GameState {

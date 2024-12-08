@@ -45,6 +45,10 @@ public class Othello extends Observable {
 		
 	}
 	
+	/**
+	 * set up the game based on the state parameter
+	 * @param state - GameState
+	 */
 	public void setState(GameState state) {
 		this.board = state.getBoard();
 		this.whosTurn = state.getWhosTurn();
@@ -53,6 +57,9 @@ public class Othello extends Observable {
 		
 	}
 	
+	/**
+	 * Undo the move
+	 */
 	public void undo() {
 		GameState previousState = this.historyStack.pop();
 		if (previousState == null) {
@@ -68,15 +75,27 @@ public class Othello extends Observable {
 		
 	}
 	
-	
+	/**
+	 * return the list of all the cells in the board
+	 * @return cells - ArrayList typed Rectangle
+	 */
 	protected ArrayList<Rectangle> getCells() {
 		return this.board.cells;
 	}
 	
+	/**
+	 * 
+	 * @return board - OthelloBoard
+	 */
 	protected OthelloBoard getBoard() {
 		return this.board;
 	}
 	
+	
+	/**
+	 * Return the array representation of the current board
+	 * @return char[][] board
+	 */
 	protected char[][] getBoardArray() {
 		return this.board.board;
 	}
@@ -92,6 +111,10 @@ public class Othello extends Observable {
 		return this.whosTurn;
 	}
 	
+	/**
+	 * Set whosTurn (mostly used when users are loading the game from saved_game.txt)
+	 * @param whosTurn - char
+	 */
 	public void setWhosTurn(char whosTurn) {
 		this.whosTurn = whosTurn;
 	}

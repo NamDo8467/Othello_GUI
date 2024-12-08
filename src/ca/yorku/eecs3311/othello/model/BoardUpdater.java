@@ -8,6 +8,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+/**
+ * This class is a GUI updater, and it is also an Observer.
+ * The main functionality of this class is to update the board after each move is made.
+ * @author Do Huynh
+ *
+ */
 public class BoardUpdater implements Observer {
 
 	@Override
