@@ -17,6 +17,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * This class is used as a general blueprint for any other modes that the users pick to play.
+ * It can be Player vs Player or Player vs AI or Player VS Random, hence the name is ScenePlayerVSAny.
+ * Once the user picks a mode to play, this class will create the corresponding scene by calling the constructor method
+ * @author Do Huynh
+ *
+ */
 public abstract class ScenePlayerVSAny {
 	
 	protected Othello othello;
@@ -65,7 +72,7 @@ public abstract class ScenePlayerVSAny {
 		undoButton.setPrefHeight(BUTTON_HEIGHT);
 		
 		undoButton.setOnMouseClicked((MouseEvent event) -> {
-			this.pressButton();
+			this.pressUndoButton();
 		});
 		
 		saveGameButton.setFocusTraversable(false);
@@ -131,15 +138,10 @@ public abstract class ScenePlayerVSAny {
 		this.command = command;
 	}
 	
-	public void pressButton() {
+	public void pressUndoButton() {
         command.execute();
     }
 	
-	public void saveGame() {
-		
-		
-	}
-
 	
 
 }

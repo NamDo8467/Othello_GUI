@@ -17,9 +17,6 @@ public class BoardUpdater implements Observer {
 		
 		char [][] boardArray = othello.getBoardArray();
 		
-		OthelloBoard b = othello.getBoard();
-		
-		
 		GridPane gridBoard = othello.getBoard().gridBoard;
 		
 		// Update the GUI based on the board string array	
