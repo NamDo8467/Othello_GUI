@@ -1,10 +1,10 @@
 mode:Player vs Player
-whosTurn:X
+whosTurn:O
         
         
-    X   
-   XX   
-   OOO  
-        
+    XO  
+   XO   
+  XXX   
+  OX    
         
         
