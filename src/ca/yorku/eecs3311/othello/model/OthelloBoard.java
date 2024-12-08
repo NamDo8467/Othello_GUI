@@ -1,22 +1,13 @@
 package ca.yorku.eecs3311.othello.model;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-
-import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
-
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -87,6 +78,11 @@ public class OthelloBoard {
 		gridBoard.setGridLinesVisible(true);
 	}
 	
+	/**
+	 * Add the first 4 tokens at the beginning of each game
+	 * @param row
+	 * @param col
+	 */
 	public void addTheFirst4Token(int row, int col) {
 		
 		if ((row == 3 && col == 3) || (row == 4 && col == 4)) {
@@ -322,7 +318,6 @@ public class OthelloBoard {
 	 */
 	public void addTokenTokenList(Circle token) {
 		this.tokens.add(token);
-//		System.out.println("Tokens: " + this.tokens.size());
 	}
 	
 	/**
